@@ -1,0 +1,34 @@
+{% extends 'management/base.html' %}
+
+{% block content %}
+top
+<form action="" method="GET">
+    {{ form }}
+    <button type="submit">検索</button>
+</form>
+
+<table class="table table-bordered mt-5">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>名前</th>
+            <th>日付</th>
+            <th>件数</th>
+            <th>件数分の合計金額</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for management in management_list %}
+        <tr>
+            <td>{{ management.name }}</td>
+            <td>{{ management.num }}</td>
+            <td>{{ management.charge }}</td>
+            <td>{{ management.created_at }}</td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% include 'management/page4.html' %}
+{% endblock %}
