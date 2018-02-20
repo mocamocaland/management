@@ -9,6 +9,6 @@ class Charge(models.Model):
     created_at = models.DateTimeField('日付', default=timezone.now)
 
     def __str__(self):
-        return self.name
+        return '{0} {1} {2} {3}'.format(self.name, self.num, self.charge, self.created_at)
 
 
