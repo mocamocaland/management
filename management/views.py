@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.views.decorators.http import require_POST
 from django.shortcuts import render
 from django.views import generic
+from .forms import SearchForm
 from .models import Charge
 
 
@@ -11,14 +12,22 @@ from .models import Charge
 class IndexView(generic.TemplateView):
 
 
-    template_name = 'management/management_list.html'
-'''
+    # template_name = 'management/management_list.html'
+
     model = Charge
     paginate_by = 1
 
     def get_context_data(self):
-        """テンプレートへ渡す辞書の作成"""
+        """テンプレートへ渡す辞書"""
         context = super().get_context_data()
-        context['form'] = SearchForm(self.request.GET) # 元の辞書にformを追加 カッコ内に何もなくても問題なし
+        context['form'] =  SearchForm(self.request.GET) 
         return context
-'''
+
+    def get_queryset(self):
+        """テンプレートに渡すリスト"""
+        form = SearchForm(self.request.GET)
+        form.is_valid()
+
+        queryset = super().get_queryset()
+        return queryset
+
